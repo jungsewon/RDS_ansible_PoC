@@ -1,0 +1,22 @@
+---
+- name: Deploy Linux baseline configuration                    # Playbook 이름
+  hosts: onprem_linux                                          # 대상 그룹 (위 인벤토리 참조)
+  become: yes                                                  # sudo 권한 필요
+  gather_facts: yes                                            # Ansible Fact 수집 (OS 정보 등)
+
+  roles:                                                        # 실행할 Role 목록
+    - linux_baseline                                           # 기본 설정 Role (아직 작성안함)
+    - deploy_monitoring                                        # 모니터링 에이전트 배포 Role
+
+  tasks:                                                       # 추가 Task (임시 테스트용)
+    - name: Install EPEL repository                           # 테스트 Task 1
+      dnf:
+        name: epel-release
+        state: present
+        update_cache: yes
+
+    - name: Verify NTP service                                # 테스트 Task 2
+      systemd:
+        name: chronyd
+        state: started
+        enabled: yes

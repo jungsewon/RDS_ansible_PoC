@@ -1,0 +1,12 @@
+# 온프레미스 Linux 공통 설정
+ntp_servers:
+  - kr.pool.ntp.org
+  - asia.pool.ntp.org
+
+zabbix_server: "192.168.1.50"                               # Zabbix 서버 IP
+prometheus_server: "192.168.1.51"                           # Prometheus 서버 IP
+
+firewall_allowed_ports:
+  - 22      # SSH
+  - 10050   # Zabbix Agent
+  - 9100    # Node Exporter
